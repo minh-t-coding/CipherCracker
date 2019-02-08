@@ -38,12 +38,8 @@ def shiftBy(ctext, shiftAmt):
         newtext += newletter
     return newtext
 
-def main():
-    ctext = init()
-    print(ctext)
-    print(IC(ctext))
-    print(freqAnal(ctext))
-    print(shiftBy(ctext,-16))
-    return
-
-main()
+ctext = init()
+print(ctext)
+print(IC(ctext))
+print(freqAnal(ctext))
+print(shiftBy(ctext,10))
