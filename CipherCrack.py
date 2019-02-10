@@ -1,7 +1,13 @@
 from utils import *
 from vigenere import *
 from permutation import *
+from enum import Enum
 
+class Cipher(Enum):
+    SHIFT=0
+    SUBSTITUTION=1
+    PERMUTATION=2
+    VIGENERE=3
 
 def init():
     while True:
@@ -34,10 +40,24 @@ def shiftBy(ctext, shiftAmt):
         newtext += newletter
     return newtext
 
-
+def getCipherType(ctext):
+    ic=IC(ctext)
+    if (ic<0.075 and ic>0.065):
+        freqArray=getLetterFreqArray(freqAnal(ctext))
+        englishFreqArray=getLetterFreqArray(Constants.englishLetterFreq)
+        for shift in range(26):
+            d=dot(englishFreqArray,freqArray[-shift:]+freqArray[:-shift])/len(ctext)
+            if d<0.075 and d>0.065:
+                if shift==0:
+                    return Cipher.PERMUTATION
+                else:
+                    return Cipher.SHIFT
+        return Cipher.SUBSTITUTION
+    return Cipher.VIGENERE
 
 ctext = init()
 print(ctext)
+print(getCipherType(ctext).name)
 print(IC(ctext))
 print(freqAnal(ctext))
 print(Constants.englishLetterFreq)
