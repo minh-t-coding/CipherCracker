@@ -1,3 +1,6 @@
+from constants import Constants
+from vigenere import *
+
 def init():
     while True:
         filename = input("Please enter the filename: ")
@@ -44,12 +47,10 @@ def shiftBy(ctext, shiftAmt):
         newtext += newletter
     return newtext
 
-def main():
-    ctext = init()
-    print(ctext)
-    print(IC(ctext))
-    print(freqAnal(ctext))
-    print(shiftBy(ctext,10))
-    return
-
-main()
+ctext = init()
+print(ctext)
+print(IC(ctext))
+print(freqAnal(ctext))
+print(shiftBy(ctext,10))
+print(Constants.englishLetterFreq)
+print(getKeyLength(ctext))
