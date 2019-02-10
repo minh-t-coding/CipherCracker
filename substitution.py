@@ -7,7 +7,12 @@ def substitutionDecrypt(string):
     for i in range(0,26):
         letter=chr(i+ord('A'))
         subcipher[letter]=letter
-    englishLetterFrequencies=copy.
+        
+    stringFrequencies=freqAnal(string)
+    englishLetterFrequencies=deepcopy(Constants.englishLetterFreq)
+    while len(stringFrequencies)>0:
+        plainLetter=
+        
 
 def substitutionEncrypt(string,cipher):
     ciphertext=[cipher[c] for c in string]
