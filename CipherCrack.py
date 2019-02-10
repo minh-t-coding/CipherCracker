@@ -27,13 +27,19 @@ def freqAnal(ctext):
     freqTable = {}
     for letter in range(ord('A'),ord('Z')+1):
         freqTable[chr(letter)] = ctext.count(chr(letter))
-    #TODO: Digrams??
+
+    for i in range(0,len(ctext)-1):
+        digram = "".join([ctext[i],ctext[i+1]])
+        if (digram in freqTable):
+            freqTable[digram] += 1
+        else:
+            freqTable[digram] = 1
+        
     return freqTable
 
 def shiftBy(ctext, shiftAmt):
     newtext = ""
     for letter in ctext:
-        #yes, very ugly I will change later :)
         newletter = chr((((ord(letter)-ord('A')) + shiftAmt) % 26) + ord('a'))
         newtext += newletter
     return newtext
@@ -43,7 +49,7 @@ def main():
     print(ctext)
     print(IC(ctext))
     print(freqAnal(ctext))
-    print(shiftBy(ctext,-16))
+    print(shiftBy(ctext,10))
     return
 
 main()
