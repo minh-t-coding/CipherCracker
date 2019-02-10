@@ -41,10 +41,13 @@ print(ctext)
 print(IC(ctext))
 print(freqAnal(ctext))
 print(Constants.englishLetterFreq)
+
 for letter in range(ord('A'),ord('Z')+1):
     let = chr(letter)
     print('Letter:{} Difference:{}'.format(let,freqAnal(ctext)[let]-Constants.englishLetterFreq[let]))
-#decryptColTrans(ctext)
 
-
+ctext=open('cipher1.txt').read()
+plain=shiftBy(ctext,10)
+cphr=encryptColTrans(plain.upper(),20)
+print(decryptColTrans(cphr)[:40])
 

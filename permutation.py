@@ -8,22 +8,43 @@ def numBigrams(stub, remainder):
             bigrNum += 1
     return bigrNum
 
+def encryptColTrans(string,key):
+    while len(string)%key>0:
+        string=string+'X'
+    chunked=list(chunkstring(string,key))
+    result=[]
+    for i in range(key):
+        column=[chunked[j][i] for j in range(len(chunked))]
+        result.append(''.join(column))
+    return ''.join(result)
+
+def printTransposedCiphertext(cphr,key):
+    chunked=list(chunkstring(cphr,len(cphr)//key))
+    for i in chunked:
+        print(i)
+
 def decryptColTrans(ctext):
-    stub = ctext[0:len(ctext)//7]
-    remainder = ctext[len(ctext)//7:]
-    print(len(ctext))
-    #print(stub)
-    #print(len(stub))
-    #print(remainder)
-    #print(len(remainder))
-    #delta = 0
-    #print(numBigrams(stub,remainder[delta:]))
+    stubsize = Constants.MIN_PERMUTATION_LENGTH
+    stub = ctext[:stubsize]
+    remainder = ctext[stubsize:]
     maxBigr = numBigrams(stub,remainder)
-    for delta in range(0, len(remainder)-len(stub)):
-        print(stub)
-        print(remainder[delta:])
-        print(numBigrams(stub,remainder[delta:]))
+    numrows = stubsize
+    for delta in range(len(remainder)-len(stub)+1):
+        if len(ctext)%(stubsize+delta)!=0:
+            continue
+        #print('delta '+str(delta))
+        #print(stub)
+        #print(remainder[delta:delta+len(stub)])
+        #print(numBigrams(stub,remainder[delta:]))
         bigrNum = numBigrams(stub,remainder[delta:])
         if (bigrNum > maxBigr):
             maxBigr = bigrNum
-    
+            numrows = stubsize+delta
+    return encryptColTrans(ctext,numrows)
+
+"""
+plain=open('justcommonbigrams.txt').read()
+cphr=encryptColTrans(plain.upper(),10)
+decryptColTrans(cphr)
+"""
+
