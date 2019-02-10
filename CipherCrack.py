@@ -33,6 +33,8 @@ def shiftBy(ctext, shiftAmt):
         newtext += newletter
     return newtext
 
+
+
 ctext = init()
 print(ctext)
 print(IC(ctext))
@@ -42,9 +44,12 @@ print(shiftBy(ctext,10))
 print(Constants.englishLetterFreq)
 print(getKeyLength(ctext))
 
+print(vigenereDecrypt(ctext))
+"""
 vtest=shiftBy(ctext,10)
-ctext=num2str(vigenereEncrypt(vtest,'fuck'))
+ctext=vigenereEncrypt(vtest,'fuck')
 keyLen=getKeyLength(ctext)
 print(keyLen)
-print(getKey(ctext,keyLen))
-print(num2str(vigenereEncrypt(ctext,num2str(getKey(ctext,keyLen)))))
+print((getKey(ctext,keyLen)))
+print(vigenereEncrypt(ctext,num2str(getKey(ctext,keyLen))))
+"""

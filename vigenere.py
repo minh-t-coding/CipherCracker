@@ -9,7 +9,16 @@ def vigenereEncrypt(string,key):
     keyNums=str2num(key)
     for i in range(len(stringNums)):
         nums.append((stringNums[i]+keyNums[i%len(keyNums)])%26)
-    return nums
+    return num2str(nums)
+
+def vigenereDecrypt(ctext):
+    keyLen=getKeyLength(ctext)
+    decryptKey=getKey(ctext,keyLen)
+    encryptKey=[(26-i)%26 for i in decryptKey]
+    print('vigenere encryption key: '+num2str(encryptKey))
+    plaintext=vigenereEncrypt(ctext,num2str(decryptKey)).lower()
+    return plaintext
+    
 
 def getKeyLength(string):
     coincidences=[]
@@ -39,7 +48,6 @@ def getKey(string,keyLength):
             if d>maxdot:
                 maxdot=d
                 guessLetter=shift
-        print(maxdot)
         keyGuess.append(guessLetter)
     return keyGuess
             
