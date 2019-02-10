@@ -1,5 +1,6 @@
 from utils import *
 from vigenere import *
+from permutation import *
 
 
 def init():
@@ -39,18 +40,11 @@ ctext = init()
 print(ctext)
 print(IC(ctext))
 print(freqAnal(ctext))
-print(getKey(ctext,1))
-print(shiftBy(ctext,10))
 print(Constants.englishLetterFreq)
-print(getKeyLength(ctext))
+for letter in range(ord('A'),ord('Z')+1):
+    let = chr(letter)
+    print('Letter:{} Difference:{}'.format(let,freqAnal(ctext)[let]-Constants.englishLetterFreq[let]))
+#decryptColTrans(ctext)
 
-print(vigenereDecrypt(ctext))
-"""
-vtest=shiftBy(ctext,10)
-ctext=vigenereEncrypt(vtest,'fuck')
-keyLen=getKeyLength(ctext)
-print(keyLen)
-print((getKey(ctext,keyLen)))
-print(vigenereEncrypt(ctext,num2str(getKey(ctext,keyLen))))
-"""
+
 
