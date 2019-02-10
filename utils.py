@@ -32,9 +32,6 @@ def num2str(nums):
         string=string+chr(i+ord('A'))
     return string
 
-def chunkstring(string, length):
-    return (string[0+i:length+i] for i in range(0, len(string), length))
-
 def dot(l1,l2):
     assert(len(l1)==len(l2))
     s=0
