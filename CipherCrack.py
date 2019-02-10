@@ -25,10 +25,10 @@ def IC(ctext):
         
     return (summation * (1/(N*(N-1))))
 
+
 def shiftBy(ctext, shiftAmt):
     newtext = ""
     for letter in ctext:
-        #yes, very ugly I will change later :)
         newletter = chr((((ord(letter)-ord('A')) + shiftAmt) % 26) + ord('a'))
         newtext += newletter
     return newtext
