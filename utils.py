@@ -12,14 +12,14 @@ def freqAnal(ctext):
 
 def str2num(string):
     nums=[]
-    for i in string.lower():
-        nums.append(ord(i)-ord('a'))
+    for i in string.upper():
+        nums.append(ord(i)-ord('A'))
     return nums
 
 def num2str(nums):
     string=''
     for i in nums:
-        string=string+chr(i+ord('a'))
+        string=string+chr(i+ord('A'))
     return string
 
 def chunkstring(string, length):

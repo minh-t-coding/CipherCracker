@@ -3,7 +3,7 @@ from utils import *
 
 def vigenereEncrypt(string,key):
     while len(string)%len(key)!=0:
-        string=string+"x"
+        string=string+"X"
     nums=[]
     stringNums=str2num(string)
     keyNums=str2num(key)
@@ -12,7 +12,6 @@ def vigenereEncrypt(string,key):
     return nums
 
 def getKeyLength(string):
-    # coincidences[0] is for shift 1
     coincidences=[]
     for shift in range(1,Constants.MAX_VIGENERE_LENGTH+1):
         coincidences.append(0)
@@ -25,23 +24,24 @@ def getKey(string,keyLength):
     englishFreqArray=getLetterFreqArray(Constants.englishLetterFreq)
     keyGuess=[]
     for position in range(keyLength):
-        index=0
+        index=position
         characters=[]
         while index<len(string):
             characters.append(string[index])
             index+=keyLength
         freqTable=freqAnal(''.join(characters))
         stringFreqArray=getLetterFreqArray(freqTable)
-
-        maxdot=0
+        
+        maxdot=-1
         guessLetter=-1
         for shift in range(26):
-            d=dot(englishFreqArray,stringFreqArray[-shift:]+stringFreqArray[:-shift])
+            d=dot(englishFreqArray,stringFreqArray[-shift:]+stringFreqArray[:-shift])/len(characters)
             if d>maxdot:
                 maxdot=d
                 guessLetter=shift
+        print(maxdot)
         keyGuess.append(guessLetter)
-    return keyGuess 
+    return keyGuess
             
 def getLetterFreqArray(freqArray):
     arr=[]
