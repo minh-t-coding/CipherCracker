@@ -37,4 +37,10 @@ def dot(l1,l2):
     s=0
     for i in range(len(l1)):
         s+=l1[i]*l2[i]
-    return s        
+    return s
+
+def getLetterFreqArray(freqArray):
+    arr=[]
+    for i in range(0,26):
+        arr.append(freqArray[chr(i+ord('A'))])
+    return arr

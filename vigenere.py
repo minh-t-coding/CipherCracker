@@ -51,10 +51,6 @@ def getKey(string,keyLength):
         keyGuess.append(guessLetter)
     return keyGuess
             
-def getLetterFreqArray(freqArray):
-    arr=[]
-    for i in range(0,26):
-        arr.append(freqArray[chr(i+ord('A'))])
-    return arr
+
 
 
