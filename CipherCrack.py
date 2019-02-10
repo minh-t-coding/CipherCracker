@@ -1,6 +1,6 @@
-from constants import Constants
-#from vigenere import *
-from permutation import *
+from utils import *
+from vigenere import *
+
 
 def init():
     while True:
@@ -26,26 +26,6 @@ def IC(ctext):
         
     return (summation * (1/(N*(N-1))))
 
-def monofreqAnal(ctext):
-    #returns frequencies of monograms and digrams
-    freqTable = {}
-    length = len(ctext)
-    
-    for letter in range(ord('A'),ord('Z')+1):
-        freqTable[chr(letter)] = ctext.count(chr(letter))/length
-        
-    return freqTable
-
-def bifreqAnal(ctext):
-    freqTable = {}
-    for i in range(0,len(ctext)-1):
-        digram = "".join([ctext[i],ctext[i+1]])
-        if (digram in freqTable):
-            freqTable[digram] += 1
-        else:
-            freqTable[digram] = 1
-    return freqTable
-
 def shiftBy(ctext, shiftAmt):
     newtext = ""
     for letter in ctext:
@@ -53,9 +33,24 @@ def shiftBy(ctext, shiftAmt):
         newtext += newletter
     return newtext
 
+
+
 ctext = init()
 print(ctext)
-print(Constants.englishDigramFreq)
-decryptColTrans(ctext)
+print(IC(ctext))
+print(freqAnal(ctext))
+print(getKey(ctext,1))
+print(shiftBy(ctext,10))
+print(Constants.englishLetterFreq)
+print(getKeyLength(ctext))
 
+print(vigenereDecrypt(ctext))
+"""
+vtest=shiftBy(ctext,10)
+ctext=vigenereEncrypt(vtest,'fuck')
+keyLen=getKeyLength(ctext)
+print(keyLen)
+print((getKey(ctext,keyLen)))
+print(vigenereEncrypt(ctext,num2str(getKey(ctext,keyLen))))
+"""
 
