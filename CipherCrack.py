@@ -1,5 +1,6 @@
 from constants import Constants
-from vigenere import *
+#from vigenere import *
+from permutation import *
 
 def init():
     while True:
@@ -25,19 +26,24 @@ def IC(ctext):
         
     return (summation * (1/(N*(N-1))))
 
-def freqAnal(ctext):
+def monofreqAnal(ctext):
     #returns frequencies of monograms and digrams
     freqTable = {}
+    length = len(ctext)
+    
     for letter in range(ord('A'),ord('Z')+1):
-        freqTable[chr(letter)] = ctext.count(chr(letter))
+        freqTable[chr(letter)] = ctext.count(chr(letter))/length
+        
+    return freqTable
 
+def bifreqAnal(ctext):
+    freqTable = {}
     for i in range(0,len(ctext)-1):
         digram = "".join([ctext[i],ctext[i+1]])
         if (digram in freqTable):
             freqTable[digram] += 1
         else:
             freqTable[digram] = 1
-        
     return freqTable
 
 def shiftBy(ctext, shiftAmt):
@@ -49,8 +55,7 @@ def shiftBy(ctext, shiftAmt):
 
 ctext = init()
 print(ctext)
-print(IC(ctext))
-print(freqAnal(ctext))
-print(shiftBy(ctext,10))
-print(Constants.englishLetterFreq)
-print(getKeyLength(ctext))
+print(Constants.englishDigramFreq)
+decryptColTrans(ctext)
+
+
