@@ -1,20 +1,5 @@
-from constants import Constants
-from CipherCrack import freqAnal
+from utils import *
 
-def str2num(string):
-    nums=[]
-    for i in string.lower():
-        nums.append(ord(i)-ord('a'))
-    return nums
-
-def num2str(nums):
-    string=''
-    for i in nums:
-        string=string+chr(i+ord('a'))
-    return string
-
-def chunkstring(string, length):
-    return (string[0+i:length+i] for i in range(0, len(string), length))
 
 def vigenereEncrypt(string,key):
     while len(string)%len(key)!=0:
@@ -46,9 +31,17 @@ def getKey(string,keyLength):
             characters.append(string[index])
             index+=keyLength
         freqTable=freqAnal(''.join(characters))
-        stringFreqArray=getLetterFreqArray(freqArray)
-        
-        
+        stringFreqArray=getLetterFreqArray(freqTable)
+
+        maxdot=0
+        guessLetter=-1
+        for shift in range(26):
+            d=dot(englishFreqArray,stringFreqArray[-shift:]+stringFreqArray[:-shift])
+            if d>maxdot:
+                maxdot=d
+                guessLetter=shift
+        keyGuess.append(guessLetter)
+    return keyGuess 
             
 def getLetterFreqArray(freqArray):
     arr=[]
@@ -56,9 +49,4 @@ def getLetterFreqArray(freqArray):
         arr.append(freqArray[chr(i+ord('A'))])
     return arr
 
-def dot(l1,l2):
-    assert(len(l1)==len(l2))
-    s=0
-    for i in range(l1):
-        s+=l1[i]*l2[i]
-    return s
+

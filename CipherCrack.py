@@ -1,4 +1,4 @@
-from constants import Constants
+from utils import *
 from vigenere import *
 
 def init():
@@ -25,14 +25,6 @@ def IC(ctext):
         
     return (summation * (1/(N*(N-1))))
 
-def freqAnal(ctext):
-    #returns frequencies of monograms and digrams
-    freqTable = {}
-    for letter in range(ord('A'),ord('Z')+1):
-        freqTable[chr(letter)] = ctext.count(chr(letter))
-    #TODO: Digrams??
-    return freqTable
-
 def shiftBy(ctext, shiftAmt):
     newtext = ""
     for letter in ctext:
@@ -45,6 +37,7 @@ ctext = init()
 print(ctext)
 print(IC(ctext))
 print(freqAnal(ctext))
+print(getKey(ctext,1))
 print(shiftBy(ctext,10))
 print(Constants.englishLetterFreq)
 print(getKeyLength(ctext))
