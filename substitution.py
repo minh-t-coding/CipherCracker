@@ -42,7 +42,7 @@ def substitutionDecrypt(string):
         key += element[0]
     print("Current proposed key is: {}".format(key))
     key = input("Enter proposed key ('ABCDEFGHIJ...'):")
-    print(replaceLetters(string,key))
+    print(replaceLetters(string,key.upper()))
     ans = input("Does this look correct? ")
     while(ans != "yes"):
         print("Current proposed key is: {}".format(key))
@@ -50,6 +50,7 @@ def substitutionDecrypt(string):
         print("Printing decrypted text...")
         print(replaceLetters(string,key.upper()))
         ans = input("Does this look correct? ")
+    print("The key was: {}".format(key))
 
 
 def substitutionEncrypt(string,cipher):
@@ -67,11 +68,4 @@ def replaceLetters(text, key):
         decryptedStr.append(letterMap[letter])
     return ''.join(decryptedStr)
 
-def getMostFrequentLetter(freqTable):
-    maxFrequency=-1
-    maxItem=None
-    for item in freqTable:
-        if freqTable[item]>maxFrequency:
-            maxItem=item
-            maxFrequency=freqTable[item]
-    return maxItem
+

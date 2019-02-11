@@ -48,3 +48,12 @@ def getLetterFreqArray(freqArray):
 
 def chunkstring(string, length):
     return (string[0+i:length+i] for i in range(0, len(string), length))
+
+def getMostFrequentLetter(freqTable):
+    maxFrequency=-1
+    maxItem=None
+    for item in freqTable:
+        if freqTable[item]>maxFrequency:
+            maxItem=item
+            maxFrequency=freqTable[item]
+    return maxItem

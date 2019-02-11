@@ -2,6 +2,7 @@ from utils import *
 from vigenere import *
 from permutation import *
 from substitution import *
+from shift import *
 from enum import Enum
 
 class Cipher(Enum):
@@ -34,13 +35,6 @@ def IC(ctext):
         
     return (summation * (1/(N*(N-1))))
 
-def shiftBy(ctext, shiftAmt):
-    newtext = ""
-    for letter in ctext:
-        newletter = chr((((ord(letter)-ord('A')) + shiftAmt) % 26) + ord('a'))
-        newtext += newletter
-    return newtext
-
 def getCipherType(ctext):
     ic=IC(ctext)
     if (ic<0.075 and ic>0.065):
@@ -57,22 +51,20 @@ def getCipherType(ctext):
     return Cipher.VIGENERE
 
 ctext = init()
-#print(ctext)
 cipherType = getCipherType(ctext).name
 print(cipherType)
-#print(IC(ctext))
-#print(freqAnal(ctext))
-#print(Constants.englishLetterFreq)
+
 if (cipherType == "SHIFT"):
-    decryptShift()
+    decryptShift(ctext)
 elif (cipherType == "VIGENERE"):
-    vigenereDecrypt(ctext)
+    print(vigenereDecrypt(ctext))
+    userIn = input("Does this look correct? ")
+    if (userIn != "yes"):
+        print("This is likely a one-time pad and thus, unsolveable. Sorry.")
 elif (cipherType == "SUBSTITUTION"):
     substitutionDecrypt(ctext)
 elif (cipherType == "PERMUTATION"):
     decryptColTrans(ctext)
-else:
-    print("This is a one-time pad and cannot be decrypted")
 
 """
 for letter in range(ord('A'),ord('Z')+1):
