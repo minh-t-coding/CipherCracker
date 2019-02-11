@@ -64,7 +64,7 @@ elif (cipherType == "VIGENERE"):
 elif (cipherType == "SUBSTITUTION"):
     substitutionDecrypt(ctext)
 elif (cipherType == "PERMUTATION"):
-    decryptColTrans(ctext)
+    print(decryptColTrans(ctext))
 
 """
 for letter in range(ord('A'),ord('Z')+1):
