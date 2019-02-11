@@ -8,7 +8,7 @@ def freqAnal(ctext):
     #returns frequencies of monograms
     freqTable = {}
     for letter in range(ord('A'),ord('Z')+1):
-        freqTable[chr(letter)] = ctext.count(chr(letter))/len(ctext)*100
+        freqTable[chr(letter)] = round(ctext.count(chr(letter))/len(ctext)*100,2)
     return freqTable
 
 def bifreqAnal(ctext):

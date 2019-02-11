@@ -1,6 +1,7 @@
 from utils import *
 from vigenere import *
 from permutation import *
+from substitution import *
 from enum import Enum
 
 class Cipher(Enum):
@@ -56,12 +57,24 @@ def getCipherType(ctext):
     return Cipher.VIGENERE
 
 ctext = init()
-print(ctext)
-print(getCipherType(ctext).name)
-print(IC(ctext))
-print(freqAnal(ctext))
-print(Constants.englishLetterFreq)
+#print(ctext)
+cipherType = getCipherType(ctext).name
+print(cipherType)
+#print(IC(ctext))
+#print(freqAnal(ctext))
+#print(Constants.englishLetterFreq)
+if (cipherType == "SHIFT"):
+    decryptShift()
+elif (cipherType == "VIGENERE"):
+    vigenereDecrypt(ctext)
+elif (cipherType == "SUBSTITUTION"):
+    substitutionDecrypt(ctext)
+elif (cipherType == "PERMUTATION"):
+    decryptColTrans(ctext)
+else:
+    print("This is a one-time pad and cannot be decrypted")
 
+"""
 for letter in range(ord('A'),ord('Z')+1):
     let = chr(letter)
     print('Letter:{} Difference:{}'.format(let,freqAnal(ctext)[let]-Constants.englishLetterFreq[let]))
@@ -71,3 +84,4 @@ plain=shiftBy(ctext,10)
 cphr=encryptColTrans(plain.upper(),20)
 print(decryptColTrans(cphr)[:40])
 
+"""
