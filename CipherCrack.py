@@ -53,6 +53,7 @@ def getCipherType(ctext):
 ctext = init()
 cipherType = getCipherType(ctext).name
 print(cipherType)
+print("IC: "+str(IC(ctext)))
 
 if (cipherType == "SHIFT"):
     decryptShift(ctext)
@@ -77,3 +78,4 @@ cphr=encryptColTrans(plain.upper(),20)
 print(decryptColTrans(cphr)[:40])
 
 """
+
